@@ -47,16 +47,11 @@ public class Feed : MonoBehaviour
             }
             else
             {
-                //timeText.text = "0";
-                //time -= Time.deltaTime;
-                //if(time <= -3)
-                //{
-                    time = 30;
-                    i = 0;
-                    feed = false;
-                    Animation.instance.PantallaInicial();
-                    slime.transform.position = new Vector3(0, -2, 0);
-                //}                
+                time = 30;
+                i = 0;
+                feed = false;
+                Animation.instance.PantallaInicial();
+                slime.transform.position = new Vector3(0, -2, 0);                            
             }
         }
     }
