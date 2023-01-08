@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class Animation : MonoBehaviour
 {
+    public static Animation instance;
+
     [SerializeField]
-    GameObject grid, gridFeed;
+    GameObject grid, gridFeed, time;
+
+    private void Awake()
+    {
+        if (Animation.instance == null)
+        {
+            Animation.instance = this;
+
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +28,7 @@ public class Animation : MonoBehaviour
         LeanTween.moveLocalY(grid, -2126f, 0f);
         LeanTween.moveLocalY(gridFeed, -2126f, 0f);
         LeanTween.moveLocalY(grid, -1293.861f, 1.5f);
+        time.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,11 +41,14 @@ public class Animation : MonoBehaviour
     {
         LeanTween.moveLocalY(grid, -2126f, 1.5f);
         LeanTween.moveLocalY(gridFeed, -1293.861f, 2f);
+        time.SetActive(true);
     }
 
     public void PantallaInicial()
     {
         LeanTween.moveLocalY(gridFeed, -2126f, 1.5f);
-        LeanTween.moveLocalY(grid, -1293.861f, 2f); 
+        LeanTween.moveLocalY(grid, -1293.861f, 2f);
+        time.SetActive(false);
     }
+    
 }
