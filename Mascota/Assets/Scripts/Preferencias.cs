@@ -16,4 +16,9 @@ public class Preferencias : MonoBehaviour
         
     }
 
+    private void Update()
+    {       
+
+    }
+
 }

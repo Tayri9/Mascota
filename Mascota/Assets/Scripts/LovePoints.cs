@@ -40,14 +40,24 @@ public class LovePoints : MonoBehaviour
         SetSlime();
     }
 
-    void  SetLevel(int points)
+
+    // Update is called once per frame
+    void Update()
     {       
+        SetLevel(points);
+        pointsText.text = points.ToString();
+        levelText.text = slimeLevel[level];
+        SetSlime();
+    }
+
+    void SetLevel(int points)
+    {
 
         if (points < 1)
         {
             level = 0;
         }
-        else if(points >= 1 && points <= 5)
+        else if (points >= 1 && points <= 5)
         {
             level = 1;
         }
@@ -77,7 +87,7 @@ public class LovePoints : MonoBehaviour
                 Debug.Log("case 0");
                 break;
 
-            case 1:                
+            case 1:
                 babySlime.SetActive(true);
                 juniorSlime.SetActive(false);
                 seniorSlime.SetActive(false);
@@ -109,11 +119,5 @@ public class LovePoints : MonoBehaviour
                 Debug.Log("case 4");
                 break;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
