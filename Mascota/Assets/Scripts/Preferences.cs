@@ -19,8 +19,10 @@ public class Preferences : MonoBehaviour
     public void Save()
     {
         PlayerPrefs.SetInt("lovePoints", LovePoints.instance.points);
-        PlayerPrefs.SetString("isHungry", Hungry.instance.isHungry.ToString());
+        //PlayerPrefs.SetString("isHungry", Hungry.instance.isHungry.ToString());
         PlayerPrefs.SetFloat("size", CollitionFood.instance.sizeX);
+
+        //lastTimeLosePointsHungry
 
         PlayerPrefs.Save();
         Debug.Log("save");

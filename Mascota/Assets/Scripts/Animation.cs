@@ -72,7 +72,7 @@ public class Animation : MonoBehaviour
         }
         else
         {
-            hungry.SetActive(true);
+            hungry.SetActive(false);
         }        
     }
 }

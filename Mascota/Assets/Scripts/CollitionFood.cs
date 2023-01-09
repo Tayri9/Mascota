@@ -24,7 +24,7 @@ public class CollitionFood : MonoBehaviour
     {
         if (col.gameObject.tag == "Food")
         {
-            if (Hungry.instance.isHungry)
+            if (Hungry.instance.IsHungry())
             {
                 LovePoints.instance.Points(3);
                 Hungry.instance.hungerPoints += 3;                

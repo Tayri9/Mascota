@@ -31,7 +31,7 @@ public class Feed : MonoBehaviour
     {           
         if(feed)
         {
-            if (time >= 0)
+            if (time >= 0 && LovePoints.instance.points > 0)
             {
                 timeText.text = ((int)time).ToString();
                 time -= Time.deltaTime;                
