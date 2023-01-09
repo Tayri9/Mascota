@@ -7,15 +7,19 @@ public class LovePoints : MonoBehaviour
 {
     public static LovePoints instance;
 
-    int points, level;
+    [SerializeField]
+    public int points;
+    
+    int level;
 
     [SerializeField]
     TextMeshProUGUI pointsText, levelText;
 
     [SerializeField]
-    GameObject babySlime, juniorSlime, seniorSlime, queenSlime;
+    GameObject slime, babySlime, juniorSlime, seniorSlime, queenSlime;
 
     string[] slimeLevel = { "Dead", "Baby", "Junior", "Senior", "Queen" };
+
 
     private void Awake()
     {
@@ -38,16 +42,36 @@ public class LovePoints : MonoBehaviour
         pointsText.text = points.ToString();
         levelText.text = slimeLevel[level];
         SetSlime();
+        slime.transform.localScale = new Vector3(PlayerPrefs.GetFloat("size", 2f), 2, 2);
+        Debug.Log("puntos: " + points);
+        Debug.Log("level: " + level);
+
     }
 
 
     // Update is called once per frame
     void Update()
-    {       
+    {
+        
+    }
+
+    public void Points(int amount)
+    {
+        points += amount;
+        CheckSlime();
+    }
+
+    public void CheckSlime()
+    {
         SetLevel(points);
         pointsText.text = points.ToString();
         levelText.text = slimeLevel[level];
         SetSlime();
+    }
+
+    public void NewGame()
+    {
+        points = 1;
     }
 
     void SetLevel(int points)
@@ -56,6 +80,7 @@ public class LovePoints : MonoBehaviour
         if (points < 1)
         {
             level = 0;
+            Animation.instance.GameOver();            
         }
         else if (points >= 1 && points <= 5)
         {

@@ -7,7 +7,7 @@ public class Animation : MonoBehaviour
     public static Animation instance;
 
     [SerializeField]
-    GameObject grid, gridFeed, time;
+    GameObject grid, gridFeed, time, gameOver;
 
     private void Awake()
     {
@@ -27,8 +27,9 @@ public class Animation : MonoBehaviour
     {
         LeanTween.moveLocalY(grid, -2126f, 0f);
         LeanTween.moveLocalY(gridFeed, -2126f, 0f);
-        LeanTween.moveLocalY(grid, -1293.861f, 1.5f);
+        LeanTween.moveLocalY(grid, -1293.861f, 1.5f);        
         time.SetActive(false);
+        gameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,4 +52,14 @@ public class Animation : MonoBehaviour
         time.SetActive(false);
     }
     
+    public void GameOver()
+    {
+        gameOver.SetActive(true);
+    }
+
+    public void PlayAgain()
+    {
+        gameOver.SetActive(false);
+        LovePoints.instance.NewGame();
+    }
 }
