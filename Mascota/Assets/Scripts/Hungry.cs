@@ -6,7 +6,7 @@ public class Hungry : MonoBehaviour
 {
     public static Hungry instance;
 
-    public bool isHungry;
+    public bool isHungry = false;
 
     public int hungerPoints = 0;
 
@@ -37,8 +37,7 @@ public class Hungry : MonoBehaviour
         {
             isHungry = false;
             hungerPoints = 0;
+            Animation.instance.IsHungry(isHungry);
         }
     }
-
-
 }

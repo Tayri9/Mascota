@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Preferences : MonoBehaviour
 {
-    [SerializeField]
-    GameObject slime;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +20,7 @@ public class Preferences : MonoBehaviour
     {
         PlayerPrefs.SetInt("lovePoints", LovePoints.instance.points);
         PlayerPrefs.SetString("isHungry", Hungry.instance.isHungry.ToString());
-        PlayerPrefs.SetFloat("size", slime.transform.localScale.x);
+        PlayerPrefs.SetFloat("size", CollitionFood.instance.sizeX);
 
         PlayerPrefs.Save();
         Debug.Log("save");

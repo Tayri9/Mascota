@@ -38,11 +38,8 @@ public class LovePoints : MonoBehaviour
     void Start()
     {
         points = PlayerPrefs.GetInt("lovePoints", 1);
-        SetLevel(points);
-        pointsText.text = points.ToString();
-        levelText.text = slimeLevel[level];
-        SetSlime();
-        slime.transform.localScale = new Vector3(PlayerPrefs.GetFloat("size", 2f), 2, 2);
+        CollitionFood.instance.sizeX = PlayerPrefs.GetFloat("size", 2f);
+        CheckSlime();
         Debug.Log("puntos: " + points);
         Debug.Log("level: " + level);
 
@@ -66,12 +63,15 @@ public class LovePoints : MonoBehaviour
         SetLevel(points);
         pointsText.text = points.ToString();
         levelText.text = slimeLevel[level];
+        slime.transform.localScale = new Vector3(CollitionFood.instance.sizeX, 2, 2);
         SetSlime();
     }
 
     public void NewGame()
     {
         points = 1;
+        CollitionFood.instance.sizeX = 2;
+        CheckSlime();
     }
 
     void SetLevel(int points)
