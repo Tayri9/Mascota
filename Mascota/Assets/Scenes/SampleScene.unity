@@ -894,13 +894,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 3602923665907362520, guid: 407997f926eec8949b451f0d42174d56, type: 3}
-  - {fileID: 8757798896912559721, guid: 35c7fb60746014140b5decd4dfb5e74f, type: 3}
-  - {fileID: 981636292539413425, guid: 1c2c3613a4069ee40b23fd4c55aeab7a, type: 3}
-  - {fileID: 7561231680773146192, guid: 8824a9aa2e82fa64999f554f0e23c5a4, type: 3}
-  - {fileID: 8252633567730158033, guid: 909db6e73b79f8747b26767368f28aeb, type: 3}
-  - {fileID: 5362803209642164351, guid: d9ac1db176295d64b877ee4519663f36, type: 3}
-  - {fileID: 6434642777480793701, guid: 664752e3312df894190b64dd97054394, type: 3}
+  - {fileID: 5038971950048535472, guid: 8d5ffd11cb63aa0418198feb7ec978e2, type: 3}
+  - {fileID: 7819283915567368600, guid: 03ae6c31beb653e47975a2f72bfb781b, type: 3}
+  - {fileID: 8099377987715699330, guid: a1f26bb76ed5ee643ba2e1b6ebf63c03, type: 3}
+  - {fileID: 7428578975168183413, guid: 2b2cf7936f136ba45ab4e92fe887e2b3, type: 3}
+  - {fileID: 6440177116629864545, guid: 77ef588b5e2078444ba42d92d08b2a27, type: 3}
+  - {fileID: 1370250452759861924, guid: 864bc94c0ad01224ab5515f3b8cc7f74, type: 3}
+  - {fileID: 4282244577954012441, guid: 00efc7b88a28e314cbb7dd5ab498ef9b, type: 3}
   slime: {fileID: 655294715}
   timeText: {fileID: 1522874822}
 --- !u!1 &430756413
@@ -1599,8 +1599,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.7289567, y: 2.255426, z: 4.6365614}
+  m_Center: {x: -1.3644781, y: 0.62771297, z: 0.6128521}
 --- !u!54 &660489623
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2410,8 +2410,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.7237465, y: 2.307899, z: 3.4232702}
+  m_Center: {x: 0.86187327, y: 0.65394926, z: 0.32160044}
 --- !u!54 &1188218996
 Rigidbody:
   m_ObjectHideFlags: 0

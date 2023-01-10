@@ -9,12 +9,16 @@ public class Hungry : MonoBehaviour
 
     //public bool isHungry = false;
 
-    public int hungerPoints = 0;
+    public int hungerPoints = 0;   
 
     int maxHungerPoints = 12;
 
-    string lastTimeLosePointsHungry;
-    string hourHungryString;
+    public string lastTimeLosePointsHungry;
+    public string hourHungryString;
+
+    //seconds
+    int timeToHungry = 30;
+    int timeToLosePoints = 10;
 
     private void Awake()
     {
@@ -31,9 +35,12 @@ public class Hungry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DateTime whenIsHungry = DateTime.Now.AddSeconds(10);
-        hourHungryString = whenIsHungry.ToString();
-        lastTimeLosePointsHungry = DateTime.Now.ToString();
+        hourHungryString = PlayerPrefs.GetString("hourHungryString", DateTime.Now.AddSeconds(timeToHungry).ToString());        
+
+        lastTimeLosePointsHungry = PlayerPrefs.GetString("lastTimeLosePointsHungry", DateTime.Now.ToString());
+
+        Debug.Log(hourHungryString);
+        Debug.Log(lastTimeLosePointsHungry);
     }
 
     // Update is called once per frame
@@ -41,7 +48,7 @@ public class Hungry : MonoBehaviour
     {
         if(hungerPoints == maxHungerPoints)
         {
-            DateTime whenIsHungry = DateTime.Now.AddMinutes(3);
+            DateTime whenIsHungry = DateTime.Now.AddSeconds(timeToHungry);
             hourHungryString = whenIsHungry.ToString();
             hungerPoints = 0;
             Animation.instance.IsHungry(IsHungry());
@@ -55,15 +62,28 @@ public class Hungry : MonoBehaviour
         }
     }
 
-    public bool CanLosePoints()
-    {
-        DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsHungry);
-        return lastTimeLosePoints.AddSeconds(20) < DateTime.Now;
-    }
-
     public bool IsHungry()
     {
         DateTime whenIsHungry = DateTime.Parse(hourHungryString);
         return whenIsHungry < DateTime.Now;
+    }
+
+    public bool CanLosePoints()
+    {
+        DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsHungry);
+        return lastTimeLosePoints.AddSeconds(timeToLosePoints) < DateTime.Now;
+    }    
+
+    void LostPoints()
+    {
+        if (IsHungry())
+        {
+            DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsHungry);
+            DateTime timeNow = DateTime.Now;
+
+            int year = timeNow.Year;
+
+            //DateTime lostPoints = lastTimeLosePoints - timeNow;
+        }
     }
 }
