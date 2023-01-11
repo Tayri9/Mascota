@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class LovePoints : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class LovePoints : MonoBehaviour
 
     [SerializeField]
     public int points;
-    
-    int level;
+
+    public float sizeX;
+
+    int level, startPoints = 1;
+
+    float startSizeX = 2;
 
     [SerializeField]
     TextMeshProUGUI pointsText, levelText;
@@ -37,8 +42,8 @@ public class LovePoints : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        points = PlayerPrefs.GetInt("lovePoints", 1);
-        CollitionFood.instance.sizeX = PlayerPrefs.GetFloat("size", 2f);
+        points = PlayerPrefs.GetInt("lovePoints", startPoints);
+        sizeX = PlayerPrefs.GetFloat("size", startSizeX);
         CheckSlime();
         Debug.Log("puntos: " + points);
         Debug.Log("level: " + level);
@@ -55,6 +60,9 @@ public class LovePoints : MonoBehaviour
     public void Points(int amount)
     {
         points += amount;
+        PlayerPrefs.SetInt("lovePoints", points);
+        PlayerPrefs.Save();
+        Debug.Log("save points");
         CheckSlime();
     }
 
@@ -63,15 +71,23 @@ public class LovePoints : MonoBehaviour
         SetLevel(points);
         pointsText.text = points.ToString();
         levelText.text = slimeLevel[level];
-        slime.transform.localScale = new Vector3(CollitionFood.instance.sizeX, 2, 2);
+        slime.transform.localScale = new Vector3(sizeX, 2, 2);
         SetSlime();
     }
 
     public void NewGame()
     {
-        points = 1;
-        CollitionFood.instance.sizeX = 2;
+        points = startPoints;
+        sizeX = startSizeX;
+        Hungry.instance.hungerPoints = 0;
         CheckSlime();
+
+        PlayerPrefs.SetInt("lovePoints", points);
+        PlayerPrefs.SetFloat("size", sizeX);
+        PlayerPrefs.SetString("hourHungryString", DateTime.Now.AddSeconds(Hungry.instance.timeToHungry).ToString());
+        PlayerPrefs.SetString("lastTimeLosePointsHungry", DateTime.Now.AddSeconds(Hungry.instance.timeToLosePoints).ToString());
+        PlayerPrefs.Save();
+        
     }
 
     void SetLevel(int points)

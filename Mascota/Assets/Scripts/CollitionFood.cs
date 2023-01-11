@@ -3,26 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CollitionFood : MonoBehaviour
-{
-    public static CollitionFood instance;
-
-    public float sizeX;
-
-    private void Awake()
-    {
-        if (CollitionFood.instance == null)
-        {
-            CollitionFood.instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
-
+{   
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Food")
+        if (col.CompareTag("Food"))
         {
             if (Hungry.instance.IsHungry())
             {
@@ -31,14 +15,18 @@ public class CollitionFood : MonoBehaviour
             }
             else
             {
-                sizeX = transform.localScale.x;
-                transform.localScale = new Vector3(sizeX + 0.1f, 2, 2);
+                LovePoints.instance.sizeX = transform.localScale.x;
+                transform.localScale = new Vector3(LovePoints.instance.sizeX + 0.1f, 2, 2);
+                LovePoints.instance.sizeX = transform.localScale.x;
+                PlayerPrefs.SetFloat("size", LovePoints.instance.sizeX);
+                PlayerPrefs.Save();
+                Debug.Log("save sizex");
             }
 
             col.gameObject.SetActive(false);
         }
 
-        if (col.gameObject.tag == "Obstacle")
+        if (col.CompareTag("Obstacle"))
         {
             LovePoints.instance.Points(-1);
             col.gameObject.SetActive(false);

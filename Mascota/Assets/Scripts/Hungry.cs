@@ -17,8 +17,8 @@ public class Hungry : MonoBehaviour
     public string hourHungryString;
 
     //seconds
-    int timeToHungry = 30;
-    int timeToLosePoints = 10;
+    public int timeToHungry = 30;
+    public int timeToLosePoints = 10;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class Hungry : MonoBehaviour
     {
         hourHungryString = PlayerPrefs.GetString("hourHungryString", DateTime.Now.AddSeconds(timeToHungry).ToString());        
 
-        lastTimeLosePointsHungry = PlayerPrefs.GetString("lastTimeLosePointsHungry", DateTime.Now.ToString());
+        lastTimeLosePointsHungry = PlayerPrefs.GetString("lastTimeLosePointsHungry", DateTime.Now.AddSeconds(timeToLosePoints).ToString());
 
         Debug.Log(hourHungryString);
         Debug.Log(lastTimeLosePointsHungry);
@@ -50,6 +50,9 @@ public class Hungry : MonoBehaviour
         {
             DateTime whenIsHungry = DateTime.Now.AddSeconds(timeToHungry);
             hourHungryString = whenIsHungry.ToString();
+            PlayerPrefs.SetString("hourHungryString", hourHungryString);
+            PlayerPrefs.Save();
+            Debug.Log("save hourHungryString");
             hungerPoints = 0;
             Animation.instance.IsHungry(IsHungry());
         }
@@ -59,6 +62,9 @@ public class Hungry : MonoBehaviour
             Animation.instance.IsHungry(IsHungry());
             LovePoints.instance.Points(-1);
             lastTimeLosePointsHungry = DateTime.Now.ToString();
+            PlayerPrefs.SetString("lastTimeLosePointsHungry", lastTimeLosePointsHungry);
+            PlayerPrefs.Save();
+            Debug.Log("save lastTimeLosePointsHungry");
         }
     }
 
