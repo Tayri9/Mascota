@@ -18,7 +18,7 @@ public class Hungry : MonoBehaviour
 
     //seconds
     public int timeToHungry = 60;
-    public int timeToLosePoints = 20;
+    public int timeToLosePoints = 10;
 
     private void Awake()
     {

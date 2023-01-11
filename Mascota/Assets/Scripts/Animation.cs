@@ -7,7 +7,7 @@ public class Animation : MonoBehaviour
     public static Animation instance;
 
     [SerializeField]
-    GameObject grid, gridFeed, time, gameOver, hungry;
+    GameObject grid, gridFeed, time, gameOver, hungry, pet;
 
     private void Awake()
     {
@@ -74,5 +74,17 @@ public class Animation : MonoBehaviour
         {
             hungry.SetActive(false);
         }        
+    }
+
+    public void CanPetText(bool canPet)
+    {
+        if (canPet)
+        {
+            pet.SetActive(true);
+        }
+        else
+        {
+            pet.SetActive(false);
+        }
     }
 }
