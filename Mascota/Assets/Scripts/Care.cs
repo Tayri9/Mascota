@@ -108,6 +108,4 @@ public class Care : MonoBehaviour
         DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsPet);
         return lastTimeLosePoints.AddSeconds(timeToLosePoints) < DateTime.Now;
     }
-
-
 }

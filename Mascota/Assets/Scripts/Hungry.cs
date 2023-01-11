@@ -89,7 +89,7 @@ public class Hungry : MonoBehaviour
 
             int year = timeNow.Year;
 
-            //DateTime lostPoints = lastTimeLosePoints - timeNow;
+            
         }
     }
 }
