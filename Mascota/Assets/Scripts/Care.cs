@@ -24,6 +24,10 @@ public class Care : MonoBehaviour
         lastTimeLosePointsPet = PlayerPrefs.GetString("lastTimeLosePointsPet", DateTime.Now.AddSeconds(timeToLosePoints).ToString());
         hourPetString = PlayerPrefs.GetString("hourPetString", DateTime.Now.AddSeconds(timeToCare).ToString());
         lastTimePetString = PlayerPrefs.GetString("lastTimePetString", DateTime.Now.AddSeconds(timeWhitoutPet).ToString());
+
+        Debug.Log(lastTimeLosePointsPet + "lastTimeLosePointsPet");
+        Debug.Log(hourPetString+"hourPetString");
+        Debug.Log(lastTimePetString+"lastTimePetString");
     }
 
     // Update is called once per frame
@@ -31,10 +35,12 @@ public class Care : MonoBehaviour
     {
         if (NoPet() && CanLosePoints())
         {
+            Debug.Log("if noPet && canLosePoints");
             Animation.instance.CanPetText(CanPet());
             LovePoints.instance.Points(-1);
             lastTimeLosePointsPet = DateTime.Now.ToString();
-            PlayerPrefs.SetString("lastTimeLosePointsHungry", lastTimeLosePointsPet);
+            PlayerPrefs.SetString("lastTimeLosePointsPet", lastTimeLosePointsPet);
+            Debug.Log("save lastTimeLosePointsPet");
             PlayerPrefs.Save();
         }
         
@@ -62,6 +68,7 @@ public class Care : MonoBehaviour
                     {
                         if (CanPet())
                         {
+                            Debug.Log("if canPet");
                             LovePoints.instance.Points(10);
                             hourPetString = DateTime.Now.AddSeconds(timeToCare).ToString();
                             lastTimePetString = DateTime.Now.AddSeconds(timeWhitoutPet).ToString();
@@ -69,6 +76,9 @@ public class Care : MonoBehaviour
                             PlayerPrefs.SetString("hourPetString", hourPetString);
                             PlayerPrefs.SetString("lastTimePetString", lastTimePetString);
                             PlayerPrefs.Save();
+
+                            Debug.Log("save hourPetString");
+                            Debug.Log("save lastTimePetString");
 
                             Animation.instance.CanPetText(CanPet());
                         }
