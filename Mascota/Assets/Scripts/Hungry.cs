@@ -17,8 +17,8 @@ public class Hungry : MonoBehaviour
     public string hourHungryString;
 
     //seconds
-    public int timeToHungry = 30;
-    public int timeToLosePoints = 10;
+    public int timeToHungry = 60;
+    public int timeToLosePoints = 20;
 
     private void Awake()
     {
