@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   lastTimeLosePointsHungry: 
   hourHungryString: 
   timeToHungry: 30
-  timeToLosePoints: 10
+  timeToLosePoints: 20
 --- !u!114 &588799026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,6 +1458,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a6d7a9de8266541bd5a2afe92f567d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToCare: 2
+  timeToLosePoints: 30
+  timeWhitoutPet: 24
+  hourPetString: 
+  lastTimeLosePointsPet: 
+  lastTimePetString: 
   particles: {fileID: 1202522996400206, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
   slime: {fileID: 655294715}
 --- !u!1 &591030406

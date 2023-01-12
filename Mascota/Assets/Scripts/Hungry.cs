@@ -90,8 +90,14 @@ public class Hungry : MonoBehaviour
             DateTime timeNow = DateTime.Now;
 
             TimeSpan diference = timeNow.Subtract(lastTimeLosePoints);
-            float minutes = (float) diference.TotalMinutes / timeToLosePoints;
-            LovePoints.instance.Points((int)minutes);
+           
+            float minutes = (float)diference.TotalSeconds / timeToLosePoints;
+            Debug.Log("minutes: "+minutes);
+            LovePoints.instance.Points(-(int)minutes);
         }
     }
 }
+/* Debug.Log("lastTimeLosePoints: "+ lastTimeLosePoints);
+            Debug.Log("timenow: " + timeNow);
+            Debug.Log("diference: " + diference.TotalSeconds);
+            Debug.Log("timeToLosePoints: " + timeToLosePoints);*/

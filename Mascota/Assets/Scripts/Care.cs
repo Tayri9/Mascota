@@ -41,6 +41,8 @@ public class Care : MonoBehaviour
 
         Animation.instance.CanPetText(CanPet());
 
+        LostPoints();
+
         Debug.Log(lastTimeLosePointsPet + "lastTimeLosePointsPet");
         Debug.Log(hourPetString+"hourPetString");
         Debug.Log(lastTimePetString+"lastTimePetString");
@@ -128,5 +130,20 @@ public class Care : MonoBehaviour
     {
         DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsPet);
         return lastTimeLosePoints.AddMinutes(timeToLosePoints) < DateTime.Now;
+    }
+
+    void LostPoints()
+    {
+        if (NoPet())
+        {
+            DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsPet);
+            DateTime timeNow = DateTime.Now;
+
+            TimeSpan diference = timeNow.Subtract(lastTimeLosePoints);
+            
+            float minutes = (float)diference.TotalSeconds / timeToLosePoints;
+
+            LovePoints.instance.Points(-(int)minutes);
+        }
     }
 }
