@@ -3,31 +3,51 @@ using System;
 
 public class Care : MonoBehaviour
 {
+    public static Care instance;
+
     int timeToTouch = 2;
     DateTime timeTouching;
     bool alreadyTouch = false;
 
-    int timeToCare = 20;        //tiempo para conseguir puntos al acariciar
-    int timeToLosePoints = 30;  //tiempo para perder puntos por no ser acariciado
-    int timeWhitoutPet = 24;    //tiempo sin ser acariciado
+    public int timeToCare = 2;        //tiempo para conseguir puntos al acariciar
+    public int timeToLosePoints = 30;  //tiempo para perder puntos por no ser acariciado
+    public int timeWhitoutPet = 24;    //tiempo sin ser acariciado
 
-    string hourPetString;               //tiempo para conseguir puntos al acariciar
-    string lastTimeLosePointsPet;       //tiempo para perder puntos por no ser acariciado
-    string lastTimePetString;           //tiempo sin ser acariciado
+    public string hourPetString;               //tiempo para conseguir puntos al acariciar
+    public string lastTimeLosePointsPet;       //tiempo para perder puntos por no ser acariciado
+    public string lastTimePetString;           //tiempo sin ser acariciado
 
     [SerializeField]
     GameObject particles, slime;
 
+    private void Awake()
+    {
+        if (Care.instance == null)
+        {
+            Care.instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        lastTimeLosePointsPet = PlayerPrefs.GetString("lastTimeLosePointsPet", DateTime.Now.AddSeconds(timeToLosePoints).ToString());
+        lastTimeLosePointsPet = PlayerPrefs.GetString("lastTimeLosePointsPet", DateTime.Now.AddMinutes(timeToLosePoints).ToString());
         hourPetString = PlayerPrefs.GetString("hourPetString", DateTime.Now.AddSeconds(timeToCare).ToString());
-        lastTimePetString = PlayerPrefs.GetString("lastTimePetString", DateTime.Now.AddSeconds(timeWhitoutPet).ToString());
+        lastTimePetString = PlayerPrefs.GetString("lastTimePetString", DateTime.Now.AddHours(timeWhitoutPet).ToString());
+
+        Animation.instance.CanPetText(CanPet());
 
         Debug.Log(lastTimeLosePointsPet + "lastTimeLosePointsPet");
         Debug.Log(hourPetString+"hourPetString");
         Debug.Log(lastTimePetString+"lastTimePetString");
+
+        Debug.Log("canpet: "+CanPet());
+        Debug.Log("canlosepoints: " + CanLosePoints());
+        Debug.Log("nopet: " + NoPet());
     }
 
     // Update is called once per frame
@@ -58,6 +78,7 @@ public class Care : MonoBehaviour
             {
                 if (hitInfo.collider.tag.Equals("Player"))
                 {
+                    Debug.Log("touching slime");
                     if (!alreadyTouch)
                     {
                         timeTouching = DateTime.Now.AddSeconds(timeToTouch);                        
@@ -70,8 +91,8 @@ public class Care : MonoBehaviour
                         {
                             Debug.Log("if canPet");
                             LovePoints.instance.Points(10);
-                            hourPetString = DateTime.Now.AddSeconds(timeToCare).ToString();
-                            lastTimePetString = DateTime.Now.AddSeconds(timeWhitoutPet).ToString();
+                            hourPetString = DateTime.Now.AddHours(timeToCare).ToString();
+                            lastTimePetString = DateTime.Now.AddHours(timeWhitoutPet).ToString();
 
                             PlayerPrefs.SetString("hourPetString", hourPetString);
                             PlayerPrefs.SetString("lastTimePetString", lastTimePetString);
@@ -106,6 +127,6 @@ public class Care : MonoBehaviour
     public bool CanLosePoints()
     {
         DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsPet);
-        return lastTimeLosePoints.AddSeconds(timeToLosePoints) < DateTime.Now;
+        return lastTimeLosePoints.AddMinutes(timeToLosePoints) < DateTime.Now;
     }
 }

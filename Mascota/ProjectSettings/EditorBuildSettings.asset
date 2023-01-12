@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 87679dac178662f4a84db6b9831fb485, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: bf255fc1b915d1541993deeda6d60cfa, type: 2}

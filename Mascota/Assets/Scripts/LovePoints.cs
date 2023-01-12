@@ -41,7 +41,7 @@ public class LovePoints : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {       
         points = PlayerPrefs.GetInt("lovePoints", startPoints);
         sizeX = PlayerPrefs.GetFloat("size", startSizeX);
         CheckSlime();
@@ -86,6 +86,15 @@ public class LovePoints : MonoBehaviour
         PlayerPrefs.SetFloat("size", sizeX);
         PlayerPrefs.SetString("hourHungryString", DateTime.Now.AddSeconds(Hungry.instance.timeToHungry).ToString());
         PlayerPrefs.SetString("lastTimeLosePointsHungry", DateTime.Now.AddSeconds(Hungry.instance.timeToLosePoints).ToString());
+
+        PlayerPrefs.SetString("lastTimeLosePointsPet", DateTime.Now.ToString());
+        PlayerPrefs.SetString("hourPetString", DateTime.Now.ToString());
+        PlayerPrefs.SetString("lastTimePetString", DateTime.Now.ToString());
+        /*
+        PlayerPrefs.SetString("lastTimeLosePointsPet", DateTime.Now.AddMinutes(Care.instance.timeToLosePoints).ToString());
+        PlayerPrefs.SetString("hourPetString", DateTime.Now.AddSeconds(Care.instance.timeToCare).ToString());
+        PlayerPrefs.SetString("lastTimePetString", DateTime.Now.AddHours(Care.instance.timeWhitoutPet).ToString());
+        */
         PlayerPrefs.Save();
         
     }

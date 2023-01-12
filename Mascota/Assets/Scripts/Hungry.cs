@@ -17,8 +17,8 @@ public class Hungry : MonoBehaviour
     public string hourHungryString;
 
     //seconds
-    public int timeToHungry = 60;
-    public int timeToLosePoints = 10;
+    public int timeToHungry = 3;
+    public int timeToLosePoints = 20;
 
     private void Awake()
     {
@@ -35,9 +35,11 @@ public class Hungry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hourHungryString = PlayerPrefs.GetString("hourHungryString", DateTime.Now.AddSeconds(timeToHungry).ToString());        
+        hourHungryString = PlayerPrefs.GetString("hourHungryString", DateTime.Now.AddHours(timeToHungry).ToString());        
 
-        lastTimeLosePointsHungry = PlayerPrefs.GetString("lastTimeLosePointsHungry", DateTime.Now.AddSeconds(timeToLosePoints).ToString());
+        lastTimeLosePointsHungry = PlayerPrefs.GetString("lastTimeLosePointsHungry", DateTime.Now.AddMinutes(timeToLosePoints).ToString());
+        
+        LostPoints();       
 
         Debug.Log(hourHungryString);
         Debug.Log(lastTimeLosePointsHungry);
@@ -48,7 +50,7 @@ public class Hungry : MonoBehaviour
     {
         if(hungerPoints == maxHungerPoints)
         {
-            DateTime whenIsHungry = DateTime.Now.AddSeconds(timeToHungry);
+            DateTime whenIsHungry = DateTime.Now.AddSeconds(timeToHungry); //hours
             hourHungryString = whenIsHungry.ToString();
             PlayerPrefs.SetString("hourHungryString", hourHungryString);
             PlayerPrefs.Save();
@@ -77,7 +79,7 @@ public class Hungry : MonoBehaviour
     public bool CanLosePoints()
     {
         DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsHungry);
-        return lastTimeLosePoints.AddSeconds(timeToLosePoints) < DateTime.Now;
+        return lastTimeLosePoints.AddSeconds(timeToLosePoints) < DateTime.Now; //minutes
     }    
 
     void LostPoints()
@@ -87,9 +89,9 @@ public class Hungry : MonoBehaviour
             DateTime lastTimeLosePoints = DateTime.Parse(lastTimeLosePointsHungry);
             DateTime timeNow = DateTime.Now;
 
-            int year = timeNow.Year;
-
-            
+            TimeSpan diference = timeNow.Subtract(lastTimeLosePoints);
+            float minutes = (float) diference.TotalMinutes / timeToLosePoints;
+            LovePoints.instance.Points((int)minutes);
         }
     }
 }
